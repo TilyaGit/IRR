@@ -1,0 +1,19 @@
+﻿@model IQueryable<IRR.Core.Category>
+
+
+<p><a asp-action="Create">Добавить категорию</a></p>
+
+
+<ul>
+    @foreach (var item in Model)
+    {
+    <li>
+        @item.Name
+            <ul>
+                <li>
+                    @Html.ShowCategories(item.Children)
+                </li>
+            </ul>
+    </li>
+    }
+</ul>
