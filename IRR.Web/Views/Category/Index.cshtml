@@ -1,4 +1,4 @@
-﻿@model IQueryable<IRR.Core.Category>
+﻿@model ICollection<IRR.Core.Category>
 
 
 <p><a asp-action="Create">Добавить категорию</a></p>
@@ -7,13 +7,11 @@
 <ul>
     @foreach (var item in Model)
     {
-    <li>
-        @item.Name
-            <ul>
-                <li>
-                    @Html.ShowCategories(item.Children)
-                </li>
-            </ul>
-    </li>
+        <li>
+            @item.Name
+            <li>
+                @Html.ShowCategories(item.Children)
+            </li>
+        </li>
     }
 </ul>

@@ -24,9 +24,12 @@ namespace IRR.Web
             var result = "<ul>";
             foreach (var category in categories)
             {
-                result += $"<li>{category.Name}</li>";
+                result += "<li>";
+                result += category.Name;
+                RecursiveCategories(builder, category.Children);
+                result += "</li>";
             }
-            result += $"{result}</ul>";
+            result += "</ul>";
 
             return builder.Append(result);
         }

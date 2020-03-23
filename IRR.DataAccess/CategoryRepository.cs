@@ -22,12 +22,9 @@ namespace IRR.DataAccess
             _dbContext.Categories.Add(category);
         }
 
-        public async Task<IQueryable<Category>> GetRootCategories()
+        public async Task<ICollection<Category>> GetRootCategories()
         {
-            //var categories = await _dbContext.Categories.ToListAsync();
-            //return categories.AsReadOnly();
-            var categories = _dbContext.Categories.Where(r => r.ParentId == null);
-            return categories;
+            return _dbContext.Categories.Where(r => r.ParentId == null).Include(s => s.Children).ToList();
         }
     }
 }

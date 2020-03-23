@@ -10,6 +10,6 @@ namespace IRR.Core
         Task Add([NotNull] Category category);
 
         [ItemNotNull]
-        Task<IQueryable<Category>> GetRootCategories();
+        Task<ICollection<Category>> GetRootCategories();
     }
 }
