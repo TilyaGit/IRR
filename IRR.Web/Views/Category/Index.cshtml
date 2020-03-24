@@ -1,17 +1,15 @@
 ﻿@model ICollection<IRR.Core.Category>
 
 
-<p><a asp-action="Create">Добавить категорию</a></p>
+<p><a asp-action="Create">Add</a></p>
 
 
 <ul>
     @foreach (var item in Model)
     {
+        @item.Name
         <li>
-            @item.Name
-            <li>
-                @Html.ShowCategories(item.Children)
-            </li>
+            @Html.ShowCategories(item.Children)
         </li>
     }
 </ul>

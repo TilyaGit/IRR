@@ -35,7 +35,7 @@ namespace IRR.Web.Controllers
                     ParentId = 1
                 };
 
-                await _categoryRepository.Add(category);
+                await _categoryRepository.AddCategory(category);
 
                 uow.Commit();
                 return View();

@@ -12,5 +12,6 @@ namespace IRR.DataAccess.Configurations
                 .WithOne(c => c.Parent)
                 .HasForeignKey(c => c.ParentId);
         }
+
     }
 }

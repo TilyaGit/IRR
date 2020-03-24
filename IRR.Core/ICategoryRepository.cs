@@ -7,9 +7,10 @@ namespace IRR.Core
 {
     public interface ICategoryRepository
     {
-        Task Add([NotNull] Category category);
+        Task AddCategory([NotNull] Category category);
 
         [ItemNotNull]
         Task<ICollection<Category>> GetRootCategories();
+
     }
 }

@@ -20,9 +20,11 @@ namespace IRR.Web
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllersWithViews();
+            services.AddControllersWithViews()
+                ;
             services.AddDbContext<IRRDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("IRR")));
+
             services.AddTransient<IUnitOfWork, UnitOfWork>();
             services.AddTransient<IUnitOfWorkFactory, UnitOfWorkRepository>();
             services.AddTransient<ICategoryRepository, CategoryRepository>();

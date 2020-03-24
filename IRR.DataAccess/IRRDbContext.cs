@@ -11,6 +11,12 @@ namespace IRR.DataAccess
         {
             Database.EnsureCreated();
         }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            //optionsBuilder.UseLazyLoadingProxies();
+        }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -24,7 +30,7 @@ namespace IRR.DataAccess
             },
                 new Category
                 {
-                    Id = 12,
+                    Id = 2,
                     Name = "Мебель"
                 });
         }

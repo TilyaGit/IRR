@@ -21,17 +21,17 @@ namespace IRR.Web
             {
                 return builder;
             }
-            var result = "<ul>";
+            builder.Append("<ul>");
             foreach (var category in categories)
             {
-                result += "<li>";
-                result += category.Name;
+                builder.Append("<li>");
+                builder.Append(category.Name);
                 RecursiveCategories(builder, category.Children);
-                result += "</li>";
+                builder.Append("</li>");
             }
-            result += "</ul>";
+            builder.Append("</ul>");
 
-            return builder.Append(result);
+            return builder.Append(builder);
         }
     }
 }

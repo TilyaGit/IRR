@@ -17,14 +17,21 @@ namespace IRR.DataAccess
             _dbContext = dbContext ?? throw new ArgumentNullException(nameof(dbContext));
         }
 
-        public async Task Add(Category category)
+        public async Task AddCategory(Category category)
         {
             _dbContext.Categories.Add(category);
         }
 
         public async Task<ICollection<Category>> GetRootCategories()
         {
-            return _dbContext.Categories.Where(r => r.ParentId == null).Include(s => s.Children).ToList();
+
+            var categories = _dbContext.Categories
+                .Include(e => e.Children)
+                .AsEnumerable()
+                .Where(e => e.ParentId == null)
+                .ToList();
+            return categories;
+
         }
     }
 }
