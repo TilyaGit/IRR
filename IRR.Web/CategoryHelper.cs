@@ -29,9 +29,7 @@ namespace IRR.Web
                 RecursiveCategories(builder, category.Children);
                 builder.Append("</li>");
             }
-            builder.Append("</ul>");
-
-            return builder.Append(builder);
+            return builder.Append("</ul>");
         }
     }
 }

@@ -25,16 +25,10 @@ namespace IRR.Web.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Create()
+        public async Task<IActionResult> Create(Category category)
         {
             using (var uow = _unitOfWorkFactory.Create())
             {
-                var category = new Category
-                {
-                    Name = "Офисная техника",
-                    ParentId = 1
-                };
-
                 await _categoryRepository.AddCategory(category);
 
                 uow.Commit();
