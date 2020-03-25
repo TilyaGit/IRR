@@ -2,6 +2,7 @@
 using System.Text;
 using IRR.Core;
 using Microsoft.AspNetCore.Html;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace IRR.Web
@@ -14,7 +15,6 @@ namespace IRR.Web
             builder = RecursiveCategories(builder, categories);
             return new HtmlString(builder.ToString());
         }
-
         public static StringBuilder RecursiveCategories(StringBuilder builder, ICollection<Category> categories)
         {
             if (categories.Count == 0)
@@ -26,6 +26,11 @@ namespace IRR.Web
             {
                 builder.Append("<li>");
                 builder.Append(category.Name);
+                builder.Append("<button>");
+                builder.Append("<a asp-route-id='category.Id'>");
+                builder.Append(" * ");
+                builder.Append("</a>");
+                builder.Append("</button>");
                 RecursiveCategories(builder, category.Children);
                 builder.Append("</li>");
             }

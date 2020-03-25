@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using IRR.Core;
 using JetBrains.Annotations;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Internal;
 
 namespace IRR.DataAccess
 {
@@ -19,7 +20,16 @@ namespace IRR.DataAccess
 
         public async Task AddCategory(Category category)
         {
-            _dbContext.Categories.Add(category);
+            var cat = _dbContext.Categories.Add(category);
+                //.Include(d=>d.Parent)
+                //.Where(s=>s.Parent.Id==category.Id)
+                //.First();
+                //.SingleOrDefault(c => c.Parent.Id == category.Parent.Id);
+
+            //var child = category;
+
+            //cat.Children.Add(child);
+            _dbContext.SaveChanges();
         }
 
         public async Task<ICollection<Category>> GetRootCategories()
@@ -32,6 +42,11 @@ namespace IRR.DataAccess
                 .ToList();
             return categories;
 
+        }
+
+        public ICollection<Category> GetCategories()
+        {
+            return _dbContext.Categories.ToList();
         }
     }
 }

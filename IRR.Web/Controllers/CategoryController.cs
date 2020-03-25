@@ -2,7 +2,9 @@
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using IRR.Core;
+using IRR.Web.Models;
 using JetBrains.Annotations;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace IRR.Web.Controllers
 {
@@ -24,22 +26,24 @@ namespace IRR.Web.Controllers
             return View(categories);
         }
 
-        [HttpGet]
-        public async Task<IActionResult> Create(Category category)
+        public async Task<IActionResult> Create()
         {
-            using (var uow = _unitOfWorkFactory.Create())
+            var categories = _categoryRepository.GetCategories();
+            var viewModel = new CategoryViewModel()
+            {
+                CategorySelectList = new SelectList(categories, "Id", "Name")
+            };
+            return View(viewModel);
+        }
+        [HttpPost]
+        public async Task<IActionResult> Create([FromForm]Category category)
+        {
+            if (ModelState.IsValid)
             {
                 await _categoryRepository.AddCategory(category);
-
-                uow.Commit();
-                return View();
+                return RedirectToAction(nameof(Index));
             }
+            return View();
         }
-
-        //[HttpPost]
-        //public async Task<IActionResult> CreatePost()
-        //{
-        //    return View();
-        //}
     }
 }

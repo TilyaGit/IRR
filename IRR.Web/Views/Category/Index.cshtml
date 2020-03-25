@@ -1,11 +1,19 @@
 ﻿@model ICollection<IRR.Core.Category>
 
-<p><a asp-action="Create">Add</a></p>
 
-
-
-@foreach (var item in Model)
-{
-    @item.Name
-    @Html.ShowCategories(item.Children)
-}
+<p>
+    @foreach (var item in Model)
+    {
+        <ul>
+            <li>
+                @item.Name 
+                <button>
+                    <a asp-action="Create" asp-route-id="@item.Id">
+                        +
+                    </a>
+                </button>
+                @Html.ShowCategories(item.Children)
+            </li>
+        </ul>
+    }
+</p>
