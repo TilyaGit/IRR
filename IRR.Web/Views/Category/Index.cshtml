@@ -2,16 +2,21 @@
 
 
 <p>
+    <a asp-action="Create">
+            <button class="btn btn-outline-info">
+                +
+            </button>
+        </a>
     @foreach (var item in Model)
     {
         <ul>
             <li>
-                @item.Name 
-                <button>
-                    <a asp-action="Create" asp-route-id="@item.Id">
+                @item.Name
+                <a asp-action="Create" asp-route-id="@item.Id">
+                    <button class="btn btn-outline-info">
                         +
-                    </a>
-                </button>
+                    </button>
+                </a>
                 @Html.ShowCategories(item.Children)
             </li>
         </ul>

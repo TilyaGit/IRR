@@ -11,7 +11,6 @@ namespace IRR.Core
         [ItemNotNull]
         Task<ICollection<Category>> GetRootCategories();
 
-        [ItemNotNull]
-        ICollection<Category> GetCategories();
+        Category GetCategory(int? id);
     }
 }

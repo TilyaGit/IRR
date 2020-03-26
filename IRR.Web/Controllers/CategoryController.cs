@@ -2,22 +2,18 @@
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using IRR.Core;
-using IRR.Web.Models;
+using IRR.DataAccess;
 using JetBrains.Annotations;
-using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace IRR.Web.Controllers
 {
     public class CategoryController : Controller
     {
         private readonly ICategoryRepository _categoryRepository;
-        private readonly IUnitOfWorkFactory _unitOfWorkFactory;
 
-        public CategoryController(ICategoryRepository categoryRepository,
-            [NotNull] IUnitOfWorkFactory unitOfWorkFactory)
+        public CategoryController(ICategoryRepository categoryRepository)
         {
             _categoryRepository = categoryRepository ?? throw new ArgumentNullException(nameof(categoryRepository));
-            _unitOfWorkFactory = unitOfWorkFactory ?? throw new ArgumentNullException(nameof(unitOfWorkFactory));
         }
 
         public async Task<IActionResult> Index()
@@ -26,15 +22,18 @@ namespace IRR.Web.Controllers
             return View(categories);
         }
 
-        public async Task<IActionResult> Create()
+        [HttpGet]
+        public IActionResult Create(int? id)
         {
-            var categories = _categoryRepository.GetCategories();
-            var viewModel = new CategoryViewModel()
+            if (id != null)
             {
-                CategorySelectList = new SelectList(categories, "Id", "Name")
-            };
-            return View(viewModel);
+                var parentCategory = _categoryRepository.GetCategory(id);
+                ViewBag.CategoryParentName = parentCategory.Name;
+                ViewBag.CategoryParenId = parentCategory.Id;
+            }
+            return View();
         }
+
         [HttpPost]
         public async Task<IActionResult> Create([FromForm]Category category)
         {
@@ -43,7 +42,8 @@ namespace IRR.Web.Controllers
                 await _categoryRepository.AddCategory(category);
                 return RedirectToAction(nameof(Index));
             }
-            return View();
+            return View(category);
+
         }
     }
 }

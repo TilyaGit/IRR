@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 using IRR.Core;
 using JetBrains.Annotations;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Internal;
 
 namespace IRR.DataAccess
 {
@@ -18,35 +17,28 @@ namespace IRR.DataAccess
             _dbContext = dbContext ?? throw new ArgumentNullException(nameof(dbContext));
         }
 
-        public async Task AddCategory(Category category)
+        public async Task AddCategory([NotNull]Category category)
         {
-            var cat = _dbContext.Categories.Add(category);
-                //.Include(d=>d.Parent)
-                //.Where(s=>s.Parent.Id==category.Id)
-                //.First();
-                //.SingleOrDefault(c => c.Parent.Id == category.Parent.Id);
-
-            //var child = category;
-
-            //cat.Children.Add(child);
+            _dbContext.Categories.Add(category); 
             _dbContext.SaveChanges();
+        }
+
+        public Category GetCategory(int? id)
+        {
+            return _dbContext.Categories.Find(id);            
         }
 
         public async Task<ICollection<Category>> GetRootCategories()
         {
 
-            var categories = _dbContext.Categories
-                .Include(e => e.Children)
-                .AsEnumerable()
-                .Where(e => e.ParentId == null)
-                .ToList();
+            var categories = (_dbContext.Categories
+                                  .Include(e => e.Children)
+                                  .AsEnumerable() ?? throw new InvalidOperationException())
+                                  .Where(e => e.ParentId == null)
+                                  .ToList();
             return categories;
 
         }
 
-        public ICollection<Category> GetCategories()
-        {
-            return _dbContext.Categories.ToList();
-        }
     }
 }
