@@ -2,7 +2,6 @@
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using IRR.Core;
-using IRR.DataAccess;
 using JetBrains.Annotations;
 
 namespace IRR.Web.Controllers
@@ -11,7 +10,7 @@ namespace IRR.Web.Controllers
     {
         private readonly ICategoryRepository _categoryRepository;
 
-        public CategoryController(ICategoryRepository categoryRepository)
+        public CategoryController([NotNull]ICategoryRepository categoryRepository)
         {
             _categoryRepository = categoryRepository ?? throw new ArgumentNullException(nameof(categoryRepository));
         }
@@ -43,7 +42,6 @@ namespace IRR.Web.Controllers
                 return RedirectToAction(nameof(Index));
             }
             return View(category);
-
         }
     }
 }

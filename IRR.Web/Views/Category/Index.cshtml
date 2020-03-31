@@ -3,10 +3,10 @@
 
 <p>
     <a asp-action="Create">
-            <button class="btn btn-outline-info">
-                +
-            </button>
-        </a>
+        <button class="btn btn-outline-info">
+            Новая категория
+        </button>
+    </a>
     @foreach (var item in Model)
     {
         <ul>
@@ -15,6 +15,11 @@
                 <a asp-action="Create" asp-route-id="@item.Id">
                     <button class="btn btn-outline-info">
                         +
+                    </button>
+                </a>
+                <a asp-controller="CategoryField" asp-action="Index" asp-route-id="@item.Id">
+                    <button class="btn btn-outline-success">
+                        !
                     </button>
                 </a>
                 @Html.ShowCategories(item.Children)

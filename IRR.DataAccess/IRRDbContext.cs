@@ -1,5 +1,6 @@
 ﻿using IRR.Core;
 using IRR.DataAccess.Configurations;
+using IRR.DataAccess.Configurations;
 using Microsoft.EntityFrameworkCore;
 
 namespace IRR.DataAccess
@@ -7,32 +8,32 @@ namespace IRR.DataAccess
     public class IRRDbContext : DbContext
     {
         public DbSet<Category> Categories { get; set; }
+        public DbSet<CategoryField> CategoryModelFields { get; set; }
+        
         public IRRDbContext(DbContextOptions<IRRDbContext> options) : base(options)
         {
             Database.EnsureCreated();
         }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            //optionsBuilder.UseLazyLoadingProxies();
+            base.OnModelCreating(modelBuilder);
+
+            modelBuilder.ApplyConfiguration(new CategoryItemFieldConfiguration());
+
+            //modelBuilder.ApplyConfiguration(new CategoryConfiguration());
+
+            //modelBuilder.Entity<Category>().HasData(new Category
+            //{
+            //    Id = 1,
+            //    Name = "Оргтехника"
+            //},
+            //    new Category
+            //    {
+            //        Id = 2,
+            //        Name = "Мебель"
+            //    });
         }
-
-        //protected override void OnModelCreating(ModelBuilder modelBuilder)
-        //{
-        //    base.OnModelCreating(modelBuilder);
-
-        //    modelBuilder.ApplyConfiguration(new CategoryConfiguration());
-
-        //    modelBuilder.Entity<Category>().HasData(new Category
-        //    {
-        //        Id = 1,
-        //        Name = "Оргтехника"
-        //    },
-        //        new Category
-        //        {
-        //            Id = 2,
-        //            Name = "Мебель"
-        //        });
-        //}
     }
 }

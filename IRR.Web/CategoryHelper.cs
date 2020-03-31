@@ -27,9 +27,13 @@ namespace IRR.Web
             {
                 builder.Append("<li>");
                 builder.Append(category.Name);
-                builder.Append($"<a href=\"/Category/Create/{category.Id}\">" );
+                builder.Append($"<a href=\"/Category/Create/{category.Id}\">");
                 builder.Append($"<button class=\"btn btn-outline-info\">");
                 builder.Append("+</button>");
+                builder.Append("</a>");
+                builder.Append($"<a href=\"/CategoryField/Index/{category.Id}\">");
+                builder.Append($"<button class=\"btn btn-outline-success\">");
+                builder.Append("!</button>");
                 builder.Append("</a>");
                 RecursiveCategories(builder, category.Children);
                 builder.Append("</li>");
