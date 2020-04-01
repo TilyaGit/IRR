@@ -28,7 +28,7 @@ namespace IRR.Web
             services.AddTransient<IUnitOfWork, UnitOfWork>();
             services.AddTransient<IUnitOfWorkFactory, UnitOfWorkRepository>();
             services.AddTransient<ICategoryRepository, CategoryRepository>();
-            services.AddTransient<ICategoryFieldRepository, CategoryFieldRepository>();
+            services.AddTransient<ICategoryItemRepository, CategoryItemRepository>();
 
             services.AddControllersWithViews();
         }

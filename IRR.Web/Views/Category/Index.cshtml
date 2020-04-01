@@ -1,29 +1,31 @@
 ﻿@model ICollection<IRR.Core.Category>
 
 
-<p>
-    <a asp-action="Create">
-        <button class="btn btn-outline-info">
-            Новая категория
-        </button>
-    </a>
-    @foreach (var item in Model)
-    {
-        <ul>
-            <li>
-                @item.Name
-                <a asp-action="Create" asp-route-id="@item.Id">
-                    <button class="btn btn-outline-info">
-                        +
-                    </button>
-                </a>
-                <a asp-controller="CategoryField" asp-action="Index" asp-route-id="@item.Id">
-                    <button class="btn btn-outline-success">
-                        !
-                    </button>
-                </a>
-                @Html.ShowCategories(item.Children)
-            </li>
-        </ul>
-    }
-</p>
+<div>
+    <p>
+        <a asp-action="Create">
+            <button class="btn btn-outline-info">
+                Новая категория
+            </button>
+        </a>
+        @foreach (var item in Model)
+        {
+            <ul>
+                <li>
+                    @item.Name
+                    <a asp-action="Create" asp-route-id="@item.Id">
+                        <button class="btn btn-outline-info">
+                            +
+                        </button>
+                    </a>
+                    <a asp-controller="CategoryItem" asp-action="Index" asp-route-id="@item.Id">
+                        <button class="btn btn-outline-success">
+                            Типы
+                        </button>
+                    </a>
+                    @Html.ShowCategories(item.Children)
+                </li>
+            </ul>
+        }
+    </p>
+</div>

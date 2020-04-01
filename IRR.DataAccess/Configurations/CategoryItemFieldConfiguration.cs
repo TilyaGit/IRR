@@ -1,4 +1,5 @@
-﻿using IRR.Core;
+﻿using System.Collections.Generic;
+using IRR.Core;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -15,9 +16,6 @@ namespace IRR.DataAccess.Configurations
                 .HasColumnName("type")
                 .IsRequired();
 
-            //builder.HasOne(u => u.Type)
-            //    .WithOne(p => p.Name)
-            //    .HasForeignKey<CategoryItem>(p => p.Id);
         }
     }
 }

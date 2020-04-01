@@ -31,9 +31,9 @@ namespace IRR.Web
                 builder.Append($"<button class=\"btn btn-outline-info\">");
                 builder.Append("+</button>");
                 builder.Append("</a>");
-                builder.Append($"<a href=\"/CategoryField/Index/{category.Id}\">");
+                builder.Append($"<a href=\"/CategoryItem/Index/{category.Id}\">");
                 builder.Append($"<button class=\"btn btn-outline-success\">");
-                builder.Append("!</button>");
+                builder.Append("Типы</button>");
                 builder.Append("</a>");
                 RecursiveCategories(builder, category.Children);
                 builder.Append("</li>");

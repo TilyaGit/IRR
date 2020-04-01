@@ -1,4 +1,4 @@
-using System;
+using System.Collections.Generic;
 using Xunit;
 
 namespace IRR.Core.Tests
@@ -8,20 +8,22 @@ namespace IRR.Core.Tests
         [Fact]
         public void Test1()
         {
-            var tech = new Category {Id = 1, Name = "Орг тех"};
+            //var tech = new Category {Id = 1, Name = "Орг тех"};
 
-            var pc = new CategoryItem {Id = 2, Name = "PC", Parent =  tech};
-            tech.Children.Add(pc);
+            //var subTech = new Category {Id = 2, Name = "Офис тех", Parent = tech };
 
-            var field = new CategoryField{Id = 1,Name = "cpuModel",Type = CategoryFieldType.String};
-            pc.Fields.Add(field);
-            //pc.Fields.Add(new CategoryField() {Id = 1,Name = "cpuModel",Type = CategoryFieldType.Int});
+            //var pc = new CategoryItem {Id = 3, Name = "PC", Parent = subTech };
+            //subTech.Children.Add(pc);
+
+            //var field = new CategoryField{Id = 1,Name = "cpuModel",Type = CategoryFieldType.Int};
+
+            //pc.Fields.Add(field);
              
-            var concretPC = new CatalogObject(pc);
+            //var concretPC = new CatalogObject(pc);
 
-            var cpu = concretPC.Values["CpuModel"]=2;
+            //var cpu = concretPC.Values["CpuModel"]=2;
 
-            //concreatePk.Values["CPU"] = 2.2;
+
         }
     }
 }

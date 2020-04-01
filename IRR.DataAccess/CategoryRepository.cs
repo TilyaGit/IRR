@@ -19,13 +19,15 @@ namespace IRR.DataAccess
 
         public async Task AddCategory(Category category)
         {
-            await _dbContext.Categories.AddAsync(category); 
+            await _dbContext.Categories.AddAsync(category);
             await _dbContext.SaveChangesAsync();
         }
 
-        public Category GetCategory(int? id)
+        public async Task<Category> Get(int id)
         {
-            return _dbContext.Categories.Find(id);
+            return await _dbContext.Categories.
+                Include(s => s.CategoryItem).
+                FirstOrDefaultAsync(s => s.Id == id);
         }
 
         public async Task<ICollection<Category>> GetRootCategories()
@@ -33,8 +35,8 @@ namespace IRR.DataAccess
             var categories = (_dbContext.Categories
                                   .Include(e => e.Children)
                                   .AsEnumerable() ?? throw new InvalidOperationException())
-                                  .Where(e => e.ParentId == null)
-                                  .ToList();
+                .Where(e => e.ParentId == null)
+                .ToList();
             return categories;
         }
     }

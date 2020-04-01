@@ -1,6 +1,5 @@
 ﻿using IRR.Core;
 using IRR.DataAccess.Configurations;
-using IRR.DataAccess.Configurations;
 using Microsoft.EntityFrameworkCore;
 
 namespace IRR.DataAccess
@@ -8,13 +7,13 @@ namespace IRR.DataAccess
     public class IRRDbContext : DbContext
     {
         public DbSet<Category> Categories { get; set; }
+        public DbSet<CategoryItem> CategoryItems { get; set; }
         public DbSet<CategoryField> CategoryModelFields { get; set; }
         
         public IRRDbContext(DbContextOptions<IRRDbContext> options) : base(options)
         {
             Database.EnsureCreated();
         }
-
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

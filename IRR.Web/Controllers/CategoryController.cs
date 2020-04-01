@@ -10,7 +10,7 @@ namespace IRR.Web.Controllers
     {
         private readonly ICategoryRepository _categoryRepository;
 
-        public CategoryController([NotNull]ICategoryRepository categoryRepository)
+        public CategoryController([NotNull] ICategoryRepository categoryRepository)
         {
             _categoryRepository = categoryRepository ?? throw new ArgumentNullException(nameof(categoryRepository));
         }
@@ -18,29 +18,32 @@ namespace IRR.Web.Controllers
         public async Task<IActionResult> Index()
         {
             var categories = await _categoryRepository.GetRootCategories();
+
             return View(categories);
         }
 
         [HttpGet]
-        public IActionResult Create(int? id)
+        public async Task<IActionResult> Create(int id)
         {
-            if (id != null)
+            var parentCategory = await _categoryRepository.Get(id);
+            if (parentCategory != null)
             {
-                var parentCategory = _categoryRepository.GetCategory(id);
                 ViewBag.CategoryParentName = parentCategory.Name;
                 ViewBag.CategoryParenId = parentCategory.Id;
             }
+
             return View();
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create([FromForm]Category category)
+        public async Task<IActionResult> Create([FromForm] Category category)
         {
             if (ModelState.IsValid)
             {
                 await _categoryRepository.AddCategory(category);
                 return RedirectToAction(nameof(Index));
             }
+
             return View(category);
         }
     }
