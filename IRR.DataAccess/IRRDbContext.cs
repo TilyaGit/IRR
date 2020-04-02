@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using IRR.Core;
+﻿using IRR.Core;
 using IRR.DataAccess.Configurations;
 using Microsoft.EntityFrameworkCore;
 
@@ -23,20 +22,26 @@ namespace IRR.DataAccess
             modelBuilder.ApplyConfiguration(new CategoryItemFieldConfiguration());
             modelBuilder.ApplyConfiguration(new CategoryFieldTypeConfiguration());
 
-            //modelBuilder.Entity<CategoryFieldType>().HasData();
 
-            //modelBuilder.ApplyConfiguration(new CategoryConfiguration());
+            modelBuilder.ApplyConfiguration(new CategoryConfiguration());
 
             modelBuilder.Entity<Category>().HasData(
                 new Category
                 {
                     Id = 1,
-                    Name = "Оргтехника"
+                    Name = "АИС"
                 },
                 new Category
                 {
                     Id = 2,
-                    Name = "Мебель"
+                    Name = "АО",
+                    ParentId = 1
+                },
+                new Category
+                {
+                    Id = 3,
+                    Name = "ПО",
+                    ParentId = 1
                 });
         }
     }
