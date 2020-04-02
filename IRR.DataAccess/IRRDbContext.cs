@@ -1,4 +1,5 @@
-﻿using IRR.Core;
+﻿using System.Collections.Generic;
+using IRR.Core;
 using IRR.DataAccess.Configurations;
 using Microsoft.EntityFrameworkCore;
 
@@ -8,8 +9,8 @@ namespace IRR.DataAccess
     {
         public DbSet<Category> Categories { get; set; }
         public DbSet<CategoryItem> CategoryItems { get; set; }
-        public DbSet<CategoryField> CategoryModelFields { get; set; }
-        
+        public DbSet<CategoryField> CategoryFields { get; set; }
+
         public IRRDbContext(DbContextOptions<IRRDbContext> options) : base(options)
         {
             Database.EnsureCreated();
@@ -20,19 +21,23 @@ namespace IRR.DataAccess
             base.OnModelCreating(modelBuilder);
 
             modelBuilder.ApplyConfiguration(new CategoryItemFieldConfiguration());
+            modelBuilder.ApplyConfiguration(new CategoryFieldTypeConfiguration());
+
+            //modelBuilder.Entity<CategoryFieldType>().HasData();
 
             //modelBuilder.ApplyConfiguration(new CategoryConfiguration());
 
-            //modelBuilder.Entity<Category>().HasData(new Category
-            //{
-            //    Id = 1,
-            //    Name = "Оргтехника"
-            //},
-            //    new Category
-            //    {
-            //        Id = 2,
-            //        Name = "Мебель"
-            //    });
+            modelBuilder.Entity<Category>().HasData(
+                new Category
+                {
+                    Id = 1,
+                    Name = "Оргтехника"
+                },
+                new Category
+                {
+                    Id = 2,
+                    Name = "Мебель"
+                });
         }
     }
 }

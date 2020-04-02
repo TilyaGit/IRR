@@ -8,18 +8,18 @@ namespace IRR.Core.Tests
         [Fact]
         public void Test1()
         {
-            //var tech = new Category {Id = 1, Name = "Орг тех"};
+            //var tech = new Category { Id = 1, Name = "Орг тех" };
 
-            //var subTech = new Category {Id = 2, Name = "Офис тех", Parent = tech };
+            //var subTech = new Category { Id = 2, Name = "Офис тех", Parent = tech };
 
-            //var pc = new CategoryItem {Id = 3, Name = "PC", Parent = subTech };
+            //var pc = new CategoryItem { Id = 3, Name = "PC", CategoryId = 2 };
             //subTech.Children.Add(pc);
 
-            //var field = new CategoryField{Id = 1,Name = "cpuModel",Type = CategoryFieldType.Int};
+            //var field = new CategoryField { Id = 1, Name = "cpuModel", Type = CategoryFieldType.Int };
 
             //pc.Fields.Add(field);
-             
-            //var concretPC = new CatalogObject(pc);
+
+            //var concretPC = new CategoryObject(pc);
 
             //var cpu = concretPC.Values["CpuModel"]=2;
 

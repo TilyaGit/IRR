@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using IRR.Core;
+﻿using IRR.Core;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -10,11 +9,26 @@ namespace IRR.DataAccess.Configurations
         public void Configure(EntityTypeBuilder<CategoryField> builder)
         {
             builder.HasKey(x => x.Id);
+            builder
+                .HasOne(t => t.Type)
+                .WithMany();
+        }
+    }
 
-            builder.OwnsOne(x => x.Type)
-                .Property(x => x.Value)
-                .HasColumnName("type")
-                .IsRequired();
+    public class CategoryFieldTypeConfiguration : IEntityTypeConfiguration<CategoryFieldType>
+    {
+        public void Configure(EntityTypeBuilder<CategoryFieldType> builder)
+        {
+            builder.HasKey(s=>s.Value);
+            builder
+                .ToTable("FieldTypes");
+
+            builder
+                .Property(x => x.Name);
+
+            builder
+                .HasIndex(u => u.Value)
+                .IsUnique();
 
         }
     }

@@ -35,20 +35,20 @@ namespace IRR.Core
     }
     public class CategoryFieldType
     {
-        public static CategoryFieldType String = new CategoryFieldType(1, "Строковой тип");
-        public static CategoryFieldType Int = new CategoryFieldType(2, "Числовой тип");
-        public static CategoryFieldType Bool = new CategoryFieldType(3, "Логический тип");
-        public static CategoryFieldType Float = new CategoryFieldType(4, "Тип с плавающей точкой");
-        public static IEnumerable<CategoryFieldType> GetTypes => new[] { Int, String, Bool };
+        public static CategoryFieldType String = new CategoryFieldType(1, "Строковой");
+        public static CategoryFieldType Int = new CategoryFieldType(2, "Числовой");
+        public static CategoryFieldType Bool = new CategoryFieldType(3, "Логический");
+        public static CategoryFieldType Float = new CategoryFieldType(4, "Плавающий");
         public CategoryFieldType(int value, string name)
         {
             Value = value;
             Name = name;
         }
-        public string Name { get; set; }
         public int Value { get; set; }
+        public string Name { get; set; }
     }
-    public class CatalogObject
+
+    public class CategoryObject
     {
         public int Id { get; set; }
 
@@ -56,7 +56,7 @@ namespace IRR.Core
 
         public IDictionary<string, object> Values { get; set; }
 
-        public CatalogObject(CategoryItem category)
+        public CategoryObject(CategoryItem category)
         {
             CategoryItem = category;
         }

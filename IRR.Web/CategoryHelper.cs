@@ -25,8 +25,12 @@ namespace IRR.Web
             builder.Append("<ul>");
             foreach (var category in categories)
             {
+                builder.Append("<tr>");
+                builder.Append("<td>");
                 builder.Append("<li>");
                 builder.Append(category.Name);
+                builder.Append("</td>");
+                builder.Append("<td>");
                 builder.Append($"<a href=\"/Category/Create/{category.Id}\">");
                 builder.Append($"<button class=\"btn btn-outline-info\">");
                 builder.Append("+</button>");
@@ -36,6 +40,9 @@ namespace IRR.Web
                 builder.Append("Типы</button>");
                 builder.Append("</a>");
                 RecursiveCategories(builder, category.Children);
+                builder.Append("</td>");
+                builder.Append("</tr>");
+
                 builder.Append("</li>");
             }
             return builder.Append("</ul>");

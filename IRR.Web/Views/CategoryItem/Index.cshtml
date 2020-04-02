@@ -1,0 +1,37 @@
+﻿@model IRR.Core.Category
+
+<div>
+    <a asp-action="Create" asp-route-id="@ViewBag.CategoryId">
+        <button class="btn btn-outline-info">
+            Создать тип
+        </button>
+    </a>
+</div>
+
+<table class="table">
+    <thead>
+    <tr>
+        <th>
+            Типы
+        </th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model.CategoryItem)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                <a asp-controller="CategoryField" asp-action="Index" asp-route-id="@item.Id">
+                    <button class="btn btn-outline-info">
+                        +
+                    </button>
+                </a>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>
